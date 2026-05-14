@@ -7,15 +7,15 @@
 This repository contains solutions for the second lab assignment. The objective is to understand and implement **Linear Regression** and **Logistic Regression from scratch** using only NumPy (without sklearn's built-in model classes), and to evaluate their performance using various metrics and visualizations.
 
 ## Directory Structure
-- `220119_linear.ipynb`: Jupyter Notebook with Linear Regression (from scratch implementation)
-- `220119_logistic.ipynb`: Jupyter Notebook with Logistic Regression (from scratch implementation)
+- `Linear Regression/220119_linear.ipynb`: Jupyter Notebook with Linear Regression (from scratch implementation)
+- `Logistic Regression/220119_logistic.ipynb`: Jupyter Notebook with Logistic Regression (from scratch implementation)
 - `220119_links.pdf`: Document containing clickable links to GitHub and Google Colab notebooks
 - `generate_notebooks.py`: Python script that generates both notebooks programmatically
 - `generate_pdf.py`: Python script that generates the links PDF
 
 ---
 
-## 1. Linear Regression (`220119_linear.ipynb`)
+## 1. Linear Regression (`Linear Regression/220119_linear.ipynb`)
 
 ### Dataset
 - **Teens Mental Health Dataset**
@@ -49,7 +49,7 @@ class LinearRegressionFromScratch:
    - Applied StandardScaler normalization
 2. **Model Training**:
    - Custom LinearRegressionFromScratch class using Gradient Descent
-   - Trained for 100 epochs with loss curve visualization
+   - Trained for 1000 epochs with loss curve visualization
 3. **Visualizations**:
    - Loss Curve showing MSE decreasing over epochs
    - Actual vs Predicted scatter plot
@@ -62,7 +62,7 @@ class LinearRegressionFromScratch:
 
 ---
 
-## 2. Logistic Regression (`220119_logistic.ipynb`)
+## 2. Logistic Regression (`Logistic Regression/220119_logistic.ipynb`)
 
 ### Dataset
 - **Teens Mental Health Dataset**
@@ -149,7 +149,7 @@ Generates the `220119_links.pdf` file containing:
 4. Open the generated `.ipynb` files in Jupyter and run
 
 ### Option 3: Direct Notebook Execution
-Simply open `220119_linear.ipynb` and `220119_logistic.ipynb` in Jupyter or Google Colab and run all cells.
+Simply open `Linear Regression/220119_linear.ipynb` and `Logistic Regression/220119_logistic.ipynb` in Jupyter or Google Colab and run all cells.
 
 ---
 
