@@ -11,12 +11,12 @@ This repository contains implementations of **Linear Regression** and **Logistic
 
 ```
 ├── README.md
-├── Linear Regression/
+├── Linear_Regression/
 │   ├── 220119_linear.ipynb
 │   ├── dataset/
 │   │   └── Teen_Mental_Health_Dataset.csv
 │   └── screenshots/
-├── Logistic Regression/
+├── Logistic_Regression/
 │   ├── 220119_logistic.ipynb
 │   ├── dataset/
 │   │   └── Teen_Mental_Health_Dataset.csv
@@ -27,7 +27,7 @@ This repository contains implementations of **Linear Regression** and **Logistic
 
 ## 1. Linear Regression
 
-**File:** `Linear Regression/220119_linear.ipynb`
+**File:** `Linear_Regression/220119_linear.ipynb`
 
 ### Dataset
 - **Source:** Teens Mental Health Dataset
@@ -57,7 +57,7 @@ This repository contains implementations of **Linear Regression** and **Logistic
 
 ## 2. Logistic Regression
 
-**File:** `Logistic Regression/220119_logistic.ipynb`
+**File:** `Logistic_Regression/220119_logistic.ipynb`
 
 ### Dataset
 - **Source:** Teens Mental Health Dataset
@@ -93,14 +93,14 @@ This repository contains implementations of **Linear Regression** and **Logistic
 ### Option 1: Local Environment
 1. Ensure Python 3.8+ is installed
 2. Install dependencies:
-   ```bash
-   pip install pandas numpy matplotlib seaborn scikit-learn jupyter
-   ```
+    ```bash
+    pip install pandas numpy matplotlib seaborn scikit-learn jupyter
+    ```
 3. Open the notebook:
-   ```bash
-   jupyter notebook Linear\ Regression/220119_linear.ipynb
-   jupyter notebook Logistic\ Regression/220119_logistic.ipynb
-   ```
+    ```bash
+    jupyter notebook Linear_Regression/220119_linear.ipynb
+    jupyter notebook Logistic_Regression/220119_logistic.ipynb
+    ```
 4. Run all cells
 
 ### Option 2: Google Colab
