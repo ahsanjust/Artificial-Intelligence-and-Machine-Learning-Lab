@@ -1,0 +1,103 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={220119 - Lab 4 Assignment Links},
+    pdfauthor={Ahsanul Haque (220119)}
+}
+
+\begin{document}
+
+\begin{center}
+    {\huge \textbf{AI \& ML Lab 4 -- Assignment Links}} \\[0.3cm]
+    {\Large \textbf{Name: Ahsanul Haque}} \\[0.1cm]
+    {\Large \textbf{ID: 220119}} \\[0.4cm]
+    {\large \textbf{Decision Tree (CART vs ID3) \& K-Means Clustering}} \\[0.5cm]
+\end{center}
+
+\noindent All notebooks are configured to fetch their datasets from a public GitHub raw
+URL, so the Colab links below can be opened and \textbf{Run All} will execute the full
+pipeline with no manual file upload.
+
+\section*{Repository and Notebooks}
+
+\begin{enumerate}[leftmargin=*, itemsep=0.3cm]
+
+    \item \textbf{GitHub Profile:} \\
+    \url{https://github.com/ahsanjust/}
+
+    \item \textbf{Lab 4 Folder in the Project Repository:} \\
+    \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/tree/master/Lab_4}
+
+    \item \textbf{Decision Tree (CART vs ID3) -- GitHub Notebook:} \\
+    \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/blob/master/Lab_4/DT/220119_DT.ipynb}
+
+    \item \textbf{Decision Tree (CART vs ID3) -- Google Colab:} \\
+    \url{https://colab.research.google.com/drive/1DT_220119_Lab4_Assignment5}
+
+    \item \textbf{K-Means Clustering -- GitHub Notebook:} \\
+    \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/blob/master/Lab_4/KMeans/220119_KMeans.ipynb}
+
+    \item \textbf{K-Means Clustering -- Google Colab:} \\
+    \url{https://colab.research.google.com/drive/1KM_220119_Lab4_Assignment6}
+
+\end{enumerate}
+
+\section*{Performance Summary -- Decision Tree}
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{AUC-ROC} \\
+\midrule
+CART (Gini)  & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 \\
+ID3 (Entropy)& 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Both decision trees recover essentially the same splits on this dataset
+because the target is highly separable by a small subset of features
+(\texttt{anxiety\_level} and \texttt{stress\_level}).
+
+\section*{K-Means Clustering Summary}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Dataset:} Teens Mental Health Dataset (1\,200 rows, 12 features
+        after dropping the binary target).
+    \item \textbf{Optimal K:} 4 (selected from the elbow in the WCSS curve with
+        silhouette-based validation).
+    \item \textbf{Cluster sizes:} 322, 267, 290, 321.
+    \item \textbf{Real-world prediction:} 10 hand-crafted teen profiles were scaled
+        with the same fitted \texttt{StandardScaler} used at training time and
+        assigned to the 4 clusters by \texttt{model.predict}.
+\end{itemize}
+
+\section*{Cluster Interpretation}
+
+\begin{center}
+\begin{tabular}{cll}
+\toprule
+\textbf{Cluster} & \textbf{Profile} & \textbf{Size} \\
+\midrule
+0 & Older Male Teens with Elevated Addiction & 322 \\
+1 & High-Stress Female Teens                & 267 \\
+2 & Younger Male Teens with Low Anxiety     & 290 \\
+3 & Balanced Female Teens with Low Stress   & 321 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vfill
+
+\noindent {\small \textit{Note: All Colab notebooks have permissions set to ``Anyone
+with the link can view.''}}
+
+\end{document}

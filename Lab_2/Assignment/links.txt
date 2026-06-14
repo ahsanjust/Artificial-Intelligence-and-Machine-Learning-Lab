@@ -1,0 +1,5 @@
+github profile : https://github.com/ahsanjust/
+repo link : https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab
+colab link linear : https://colab.research.google.com/drive/1CeSPzoC0TaFe8V4YO5Xti4e43fL0fx5P
+colab link logistic : https://colab.research.google.com/drive/1AdmB4HRYgqWaCx4yZoptSKsGeGxSjkDs
+
