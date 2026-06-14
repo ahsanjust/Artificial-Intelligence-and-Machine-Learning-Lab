@@ -130,7 +130,7 @@ the supervised and clustering tasks; the K-Means workflow additionally introduce
 tuned via cross-validation, evaluated with multiple metrics, and visualised with
 publication-quality plots. Special emphasis is placed on the comparison between
 \textbf{CART} (Gini impurity) and \textbf{ID3} (Information Gain / Entropy) on the
-classification side, and on the elbow-based selection of $K$ together with
+classification side, and on the silhouette-based selection of $K$ together with
 centroid interpretation for the clustering side. The complete code is hosted on
 GitHub and reproducible on Google Colab with a single \emph{Run All}.\\[4pt]
 \textbf{Keywords:} Linear Regression, Logistic Regression, SVM, KNN, Decision
@@ -222,8 +222,7 @@ All six models follow the same general preprocessing pipeline:
 \begin{enumerate}[leftmargin=*, itemsep=2pt]
     \item \textbf{Load} the dataset (locally or by raw GitHub URL).
     \item \textbf{Audit} for missing values, outliers, and class imbalance.
-    \item \textbf{Encode} categorical columns with \texttt{LabelEncoder} or
-        \texttt{OneHotEncoder}.
+    \item \textbf{Encode} categorical columns with \texttt{LabelEncoder}.
     \item \textbf{Split} with a stratified 70/15/15 (or 80/20) scheme.
     \item \textbf{Scale} numerical features with \texttt{StandardScaler}
         (mandatory for distance-based and margin-based models).
@@ -299,19 +298,21 @@ The parameters are updated iteratively with batch gradient descent:
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{lrr}
+    \begin{tabular}{lr}
         \toprule
-        \textbf{Metric} & \textbf{Train} & \textbf{Test} \\
+        \textbf{Metric (Test Set)} & \textbf{Value} \\
         \midrule
-        MAE  & 0.45 & 0.46 \\
-        MSE  & 0.33 & 0.34 \\
-        RMSE & 0.57 & 0.59 \\
-        $R^{2}$ & 0.012 & $-0.014$ \\
+        MAE  & 0.4904 \\
+        MSE  & 0.3335 \\
+        RMSE & 0.5775 \\
+        $R^{2}$ & $-0.0190$ \\
         \bottomrule
     \end{tabular}
-    \caption{Linear regression evaluation on the Teens Mental Health dataset.
-    The very low $R^{2}$ indicates that the chosen features have very weak
-    linear predictive power for \texttt{academic\_performance}.}
+    \caption{Linear regression evaluation on the test set (240 samples).
+    The training MSE converged from $4.65$ to $0.165$ (a 96.5\% reduction),
+    yet the held-out $R^2$ is slightly negative, indicating that the
+    chosen features have essentially no linear predictive power for
+    \texttt{academic\_performance} on this dataset.}
     \label{tab:linear-results}
 \end{table}
 
@@ -336,11 +337,13 @@ The parameters are updated iteratively with batch gradient descent:
 \end{figure}
 
 \subsection{Analysis}
-The training and test curves overlap, indicating that the model is neither
+The training and test loss curves overlap, indicating that the model is neither
 over-fitting nor under-fitting; it is simply \emph{under-powered} for the
-target. The dataset's \texttt{academic\_performance} column does not appear
-to be strongly correlated with the lifestyle features used here, so even a
-perfectly tuned linear model would struggle.
+target. The training MSE converges cleanly to $0.165$, but the held-out
+$R^2 = -0.019$ shows that the model predicts the test samples \emph{worse}
+than a constant predictor. The dataset's \texttt{academic\_performance}
+column does not appear to be linearly correlated with the lifestyle features
+used here, so a non-linear model or richer features would be required.
 
 % =====================================================================
 % 4. LOGISTIC REGRESSION
@@ -383,10 +386,10 @@ with gradient
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{From-scratch NumPy implementation}.
     \item \textbf{Stratified 70/15/15} train/validation/test split.
-    \item \textbf{Class-weight} balancing to mitigate the 97.4\% / 2.6\%
+    \item \textbf{Class-weight} balancing to mitigate the $\approx$ 97.4\% / 2.6\%
         imbalance.
-    \item \textbf{Threshold tuning} on the validation set (default
-        $0.5$ is rarely optimal for imbalanced data).
+    \item \textbf{Threshold tuning} on the validation set. The optimal threshold
+        is $0.85$ (not the default $0.5$), yielding a validation F1 of $0.533$.
     \item \textbf{StandardScaler} for numerical features.
 \end{itemize}
 
@@ -396,14 +399,18 @@ with gradient
     \centering
     \begin{tabular}{lrrrrr}
         \toprule
-        \textbf{Metric} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC-ROC} \\
+        \textbf{Set} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC-ROC} \\
         \midrule
-        Train & 0.85 & 0.10 & 0.85 & 0.18 & 0.92 \\
-        Val   & 0.78 & 0.07 & 0.80 & 0.13 & 0.83 \\
-        Test  & 0.81 & 0.08 & 0.83 & 0.15 & 0.85 \\
+        Train (acc) & 0.9286 & -- & -- & -- & -- \\
+        Val (acc)   & 0.9056 & -- & -- & -- & -- \\
+        Test        & \textbf{0.9778} & \textbf{0.4286} & \textbf{1.0000} & \textbf{0.6000} & \textbf{0.9887} \\
         \bottomrule
     \end{tabular}
-    \caption{Logistic regression evaluation at the tuned threshold.}
+    \caption{Logistic regression evaluation. The high recall and the
+    threshold of $0.85$ show that the model deliberately accepts a few false
+    positives in order to catch every depressed teen. The AUC-ROC of
+    $\mathbf{0.9887}$ is the strongest signal that the features carry
+    genuine discriminative information.}
     \label{tab:logistic-results}
 \end{table}
 
@@ -429,11 +436,11 @@ with gradient
 \end{figure}
 
 \subsection{Analysis}
-The model trades raw accuracy for high recall on the minority class — the
-desired behaviour when the cost of missing a depressed teen is much higher
-than the cost of a false alarm. The high AUC-ROC of $0.85$ confirms that the
-features carry real signal even though the absolute accuracy is dragged
-down by the imbalance.
+At the tuned threshold of $0.85$, the model achieves a perfect recall on the
+minority class at the cost of some false positives. The high AUC-ROC of
+$0.9887$ confirms that the features carry real signal even though the
+default $0.5$ threshold would mask it. The training and validation accuracy
+curves are close ($0.93$ vs $0.91$), so the model is not over-fitting.
 
 % =====================================================================
 % 5. SUPPORT VECTOR MACHINE
@@ -486,15 +493,16 @@ GridSearchCV(SVC(class_weight='balanced', probability=True, random_state=42),
     \centering
     \begin{tabular}{lrrrrrl}
         \toprule
-        \textbf{Kernel} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC-ROC} & \textbf{Best (C, $\gamma$)} \\
+        \textbf{Kernel} & \textbf{Acc.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} & \textbf{AUC-ROC} & \textbf{Best (C, $\gamma$)} \\
         \midrule
-        Linear & 0.98 & 0.50 & 0.25 & 0.33 & 0.96 & (1, scale) \\
-        RBF    & 0.98 & 0.50 & 0.25 & 0.33 & 0.96 & (1, scale) \\
+        Linear & 0.9778 & 0.5000 & 0.2500 & 0.3333 & 0.9631 & (1, scale) \\
+        RBF    & 0.9778 & 0.5000 & 0.2500 & 0.3333 & 0.9631 & (1, scale) \\
         \bottomrule
     \end{tabular}
-    \caption{SVM evaluation on the test set. The best Linear and RBF models
-    produced identical test metrics on this dataset; the linear kernel was
-    picked as the final estimator.}
+    \caption{SVM evaluation on the test set. The best model is the RBF
+    kernel with $C=1$ and $\gamma=\text{scale}$. Linear and RBF kernels
+    produce identical test metrics on this dataset because the positive
+    class is already linearly separable in the chosen feature space.}
     \label{tab:svm-results}
 \end{table}
 
@@ -520,12 +528,14 @@ GridSearchCV(SVC(class_weight='balanced', probability=True, random_state=42),
 \end{figure}
 
 \subsection{Analysis}
-With the RBF kernel the SVM achieves a near-perfect AUC ($0.96$) but the
+With the RBF kernel the SVM reaches a very high AUC-ROC ($0.9631$) but the
 absolute recall on the minority class is limited by the extreme imbalance
 even after class-weight balancing. The decision boundary visualised in the
 2-D (\texttt{anxiety\_level}, \texttt{stress\_level}) plane shows that the
 two classes are almost linearly separable in that sub-space, which is why
-the linear and RBF kernels produce identical metrics.
+the linear and RBF kernels produce identical metrics. The validation-set
+comparison (linear F1 $= 0.50$, RBF F1 $= 0.67$) shows that the RBF kernel
+is genuinely more flexible and would generalise better on a larger test set.
 
 % =====================================================================
 % 6. K-NEAREST NEIGHBOURS
@@ -572,17 +582,17 @@ GridSearchCV(KNeighborsClassifier(),
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{lrrrrr}
+    \begin{tabular}{lrrrrl}
         \toprule
-        \textbf{Best} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC-ROC} \\
+        \textbf{Best Configuration} & \textbf{Acc.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} & \textbf{AUC-ROC} \\
         \midrule
-        $K=3$, Manhattan, uniform & 0.978 & 0.00 & 0.00 & 0.00 & 0.61 \\
+        $K=3$, Manhattan, uniform & 0.9778 & 0.0000 & 0.0000 & 0.0000 & 0.6080 \\
         \bottomrule
     \end{tabular}
     \caption{KNN evaluation. The KNN classifier achieves a very high
     accuracy simply by predicting the majority class on every test point;
     its F1 on the minority class is therefore zero. The AUC-ROC of
-    $0.61$ is the only metric that reveals any discriminative power.}
+    $0.6080$ is the only metric that reveals any discriminative power.}
     \label{tab:knn-results}
 \end{table}
 
@@ -610,11 +620,12 @@ GridSearchCV(KNeighborsClassifier(),
 \subsection{Analysis}
 KNN's failure to recover the minority class is a textbook illustration of
 the ``accuracy paradox'' on imbalanced data — a model that always predicts
-the majority class scores $97.4\%$ accuracy on this dataset without
-learning anything useful. The AUC-ROC of $0.61$ shows that KNN is not
-entirely random; the issue is purely the choice of decision threshold.
-KNN is also the slowest of the four classifiers at inference time, since
-it must compare the query point to all training instances.
+the majority class scores $97.78\%$ accuracy on this dataset without
+learning anything useful. The AUC-ROC of $0.6080$ shows that KNN is not
+entirely random; the issue is purely the choice of decision threshold and
+the small number of positive test points. KNN is also the slowest of the
+four classifiers at inference time, since it must compare the query point
+to all training instances.
 
 % =====================================================================
 % 7. DECISION TREE (CART vs ID3)
@@ -676,15 +687,16 @@ GridSearchCV(DecisionTreeClassifier(criterion='entropy', random_state=42),
     \centering
     \begin{tabular}{lrrrrrl}
         \toprule
-        \textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC-ROC} & \textbf{Best} \\
+        \textbf{Model} & \textbf{Acc.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} & \textbf{AUC-ROC} & \textbf{Best Hyperparameters} \\
         \midrule
         CART (Gini)  & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & depth=5, split=2 \\
         ID3 (Entropy)& 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & depth=5, split=2 \\
         \bottomrule
     \end{tabular}
-    \caption{Decision tree test-set evaluation. The two algorithms reach
-    identical metrics because the target is highly separable by a small
-    subset of features. Best hyperparameters are the same for both.}
+    \caption{Decision tree test-set evaluation (180 samples, 4 positives).
+    The two algorithms reach identical metrics because the target is highly
+    separable by a small subset of features. Best hyperparameters are the
+    same for both.}
     \label{tab:dt-results}
 \end{table}
 
@@ -720,15 +732,16 @@ GridSearchCV(DecisionTreeClassifier(criterion='entropy', random_state=42),
 \end{figure}
 
 \subsection{Analysis}
-Both decision trees reach a perfect test score, which is consistent with
-the correlation analysis — \texttt{anxiety\_level} and \texttt{stress\_level}
-together act as near-perfect predictors of \texttt{depression\_label} on
-this dataset. The visualised trees use only these two features at the root
-and the first split, confirming the EDA. With perfectly separable data,
-Gini and Entropy are mathematically bound to recover the same splits;
-the only practical difference between the two algorithms is the
-\emph{shape} of the impurity gradient, which becomes visible on noisier
-data.
+Both decision trees reach a perfect test score on this particular
+train/test split, which is consistent with the correlation analysis:
+\texttt{anxiety\_level} and \texttt{stress\_level} together act as
+near-perfect predictors of \texttt{depression\_label} on this dataset.
+The visualised trees use only these two features at the root and the
+first split, confirming the EDA. With perfectly separable data, Gini
+and Entropy are mathematically bound to recover the same splits; the
+only practical difference between the two algorithms is the
+\emph{shape} of the impurity gradient, which becomes visible on
+noisier data.
 
 % =====================================================================
 % 8. K-MEANS CLUSTERING
@@ -767,13 +780,14 @@ The objective is the \emph{Within-Cluster Sum of Squares} (WCSS):
 \subsection{Optimal $K$ Selection}
 
 We fit K-Means for $K = 1, \dots, 10$ and inspect the elbow in the WCSS
-curve and the silhouette score. The chosen $K = 4$ corresponds to the
-elbow inflection point and a local maximum in the silhouette score.
+curve and the silhouette score. The chosen $K = 4$ is the \textbf{global
+maximum of the silhouette score} on this dataset (silhouette $\approx 0.0695$).
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{../Lab_4/KMeans/screenshots/Elbow_Curve.png}
-    \caption{Elbow curve (WCSS) and silhouette analysis for $K = 1, \dots, 10$.}
+    \caption{Elbow curve (WCSS) and silhouette analysis for $K = 1, \dots, 10$.
+    The silhouette peaks at $K=4$.}
     \label{fig:kmeans-elbow}
 \end{figure}
 
@@ -824,17 +838,25 @@ elbow inflection point and a local maximum in the silhouette score.
 10 hand-crafted teen profiles (same column names, dtypes and ranges as the
 training set) were scaled with the \emph{same} fitted \texttt{StandardScaler}
 and assigned to a cluster with \texttt{model.predict}. The custom profiles
-spread evenly across all 4 clusters, which is the expected outcome for a
+spread across all 4 clusters, which is the expected outcome for a
 well-balanced training set.
 
 \subsection{Analysis}
-The PCA projection in Figure~\ref{fig:kmeans} shows that the four clusters
-are visually well separated in 2-D and that the centroids (black $\times$)
-sit at the centre of each cloud. The custom teen profiles
-(red $\ast$) are scattered across the map, confirming that the model
-generalises to new individuals. The persistence of the scaler and the
-fitted K-Means with \texttt{joblib} is verified by re-loading both objects
-and observing identical predictions.
+The PCA projection in Figure~\ref{fig:kmeans} shows the four clusters
+overlapping somewhat in 2-D, with the centroids (black $\times$) sitting
+inside each cloud. The custom teen profiles (red $\ast$) are scattered
+across the map, confirming that the model generalises to new
+individuals. The persistence of the scaler and the fitted K-Means with
+\texttt{joblib} is verified by re-loading both objects and observing
+identical predictions.
+
+\textbf{Important caveat.} The maximum silhouette score on this dataset
+is only $\approx 0.07$, which means that the clusters \emph{overlap
+substantially} in the original 12-D feature space. The four profiles
+above should be read as \emph{rough dominant demographics} per cluster,
+not as crisp decision rules. For crisper clusters, one would need
+either a richer feature set or a dimensionality-reduction step (e.g.\
+t-SNE) before clustering.
 
 % =====================================================================
 % 9. COMPARATIVE ANALYSIS
@@ -851,18 +873,20 @@ and observing identical predictions.
         \toprule
         \textbf{Lab} & \textbf{Model} & \textbf{Acc.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} & \textbf{AUC} & \textbf{Type} \\
         \midrule
-        2 & Linear Regression       & $-0.014$ ($R^2$) & -- & -- & -- & -- & Regression \\
-        2 & Logistic Regression     & 0.81 & 0.08 & 0.83 & 0.15 & 0.85 & Classification \\
-        3 & SVM (RBF)               & 0.98 & 0.50 & 0.25 & 0.33 & 0.96 & Classification \\
-        3 & KNN                     & 0.98 & 0.00 & 0.00 & 0.00 & 0.61 & Classification \\
-        4 & Decision Tree (CART)    & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & Classification \\
-        4 & Decision Tree (ID3)     & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & Classification \\
-        4 & K-Means (K=4)           & --   & --   & --   & --   & Silh. & Clustering \\
+        2 & Linear Regression       & $-0.019$ ($R^2$) & -- & -- & -- & -- & Regression \\
+        2 & Logistic Regression     & 0.978 & 0.429 & 1.000 & 0.600 & 0.989 & Classification \\
+        3 & SVM (RBF)               & 0.978 & 0.500 & 0.250 & 0.333 & 0.963 & Classification \\
+        3 & KNN                     & 0.978 & 0.000 & 0.000 & 0.000 & 0.608 & Classification \\
+        4 & Decision Tree (CART)    & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & Classification \\
+        4 & Decision Tree (ID3)     & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & Classification \\
+        4 & K-Means (K=4)           & --   & --   & --   & --   & Silh. 0.0695 & Clustering \\
         \bottomrule
     \end{tabular}
     \caption{Test-set metrics for the six models. K-Means is unsupervised
-    and is reported with the silhouette score instead of classification
-    metrics.}
+    and is reported with its silhouette score instead of classification
+    metrics. The very high accuracy of KNN, SVM and Logistic Regression
+    is a partial artefact of the severe class imbalance — F1, AUC-ROC and
+    the recall column reveal the real performance ranking.}
     \label{tab:all}
 \end{table}
 
@@ -919,12 +943,17 @@ respective results section.
 \subsection{What Worked}
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Decision Trees} achieved the best classification results on
-        this dataset because the target is highly separable by a small
-        subset of features. They also produce interpretable rules that
-        could be deployed in a screening tool.
-    \item \textbf{SVM (RBF)} reached the best AUC-ROC among the four
-        classifiers, demonstrating that margin-based methods are
-        well-suited to high-dimensional data.
+        this dataset (perfect accuracy, F1 and AUC) because the target is
+        highly separable by a small subset of features. They also produce
+        interpretable rules that could be deployed in a screening tool.
+    \item \textbf{Logistic Regression} with a tuned threshold reached an
+        excellent AUC-ROC of $0.989$ and $100\%$ recall on the depressed
+        class. The threshold-tuning step is what unlocks the real signal
+        that the default $0.5$ threshold hides.
+    \item \textbf{SVM (RBF)} reached a strong AUC-ROC of $0.963$, with
+        validation F1 of $0.667$ that exceeded the linear kernel — a
+        good sign that the RBF kernel is the right choice for unseen
+        positives.
     \item \textbf{K-Means} successfully identified four interpretable
         clusters, validated by both the elbow and the silhouette analysis.
 \end{itemize}
@@ -932,12 +961,15 @@ respective results section.
 \subsection{What Did Not Work}
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Linear Regression} for \texttt{academic\_performance} had
-        a near-zero $R^2$, indicating that the chosen features are not
-        linearly predictive of academic performance. A non-linear model
-        (e.g.\ random forest) or richer features would be required.
+        a near-zero $R^2$ ($-0.019$), indicating that the chosen features
+        are not linearly predictive of academic performance. A non-linear
+        model (e.g.\ random forest) or richer features would be required.
     \item \textbf{KNN} defaulted to the majority class and produced
         zero recall on the minority class. The high raw accuracy is the
         classic artefact of the accuracy paradox.
+    \item \textbf{K-Means} clusters overlap substantially (silhouette
+        $\approx 0.07$); the four profiles are best treated as rough
+        dominant demographics rather than hard segments.
 \end{itemize}
 
 \subsection{Lessons Learned}
@@ -949,6 +981,9 @@ respective results section.
         models and is harmless (but not necessary) for tree-based models.
     \item Hyperparameter tuning with cross-validation is essential —
         hand-picked defaults rarely work on real data.
+    \item Threshold tuning on the validation set is one of the highest
+        ROI steps on imbalanced data: it took logistic regression from
+        a useless majority-class predictor to $100\%$ recall.
     \item A pipeline that persists the fitted scaler and the fitted model
         guarantees reproducibility, which is exactly what the assignment
         demanded.
@@ -972,14 +1007,17 @@ Key takeaways:
     \item Decision trees are the strongest classifier on this dataset
         (perfect test accuracy, F1 and AUC), thanks to a highly
         separable target.
-    \item SVM gives the best AUC-ROC, but KNN is unreliable without
-        extra care for class imbalance.
+    \item Logistic regression with threshold tuning gives the best
+        AUC-ROC among the four classifiers; SVM (RBF) is close behind
+        with stronger validation F1.
+    \item KNN is unreliable without extra care for class imbalance.
     \item Linear regression on \texttt{academic\_performance} fails to
         find a meaningful linear relationship; richer features or a
         non-linear model are required.
     \item K-Means produces four interpretable teen archetypes that align
         with the EDA findings (stress/anxiety, age and gender are the
-        most influential features).
+        most influential features), but the low silhouette score warns
+        that the clusters overlap substantially.
     \item A fully reproducible GitHub repository, with notebooks that
         auto-fetch their data, is the cleanest way to deliver an ML
         assignment.

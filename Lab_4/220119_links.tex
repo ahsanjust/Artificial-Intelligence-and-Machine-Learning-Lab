@@ -23,8 +23,9 @@
 \end{center}
 
 \noindent All notebooks are configured to fetch their datasets from a public GitHub raw
-URL, so the Colab links below can be opened and \textbf{Run All} will execute the full
-pipeline with no manual file upload.
+URL, so they can be opened in Google Colab (via \emph{File $\rightarrow$ Open
+notebook $\rightarrow$ GitHub}) and \textbf{Run All} will execute the full pipeline
+with no manual file upload.
 
 \section*{Repository and Notebooks}
 
@@ -39,16 +40,15 @@ pipeline with no manual file upload.
     \item \textbf{Decision Tree (CART vs ID3) -- GitHub Notebook:} \\
     \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/blob/master/Lab_4/DT/220119_DT.ipynb}
 
-    \item \textbf{Decision Tree (CART vs ID3) -- Google Colab:} \\
-    \url{https://colab.research.google.com/drive/1DT_220119_Lab4_Assignment5}
-
     \item \textbf{K-Means Clustering -- GitHub Notebook:} \\
     \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/blob/master/Lab_4/KMeans/220119_KMeans.ipynb}
 
-    \item \textbf{K-Means Clustering -- Google Colab:} \\
-    \url{https://colab.research.google.com/drive/1KM_220119_Lab4_Assignment6}
-
 \end{enumerate}
+
+\noindent \emph{To open a notebook in Google Colab, navigate to the GitHub URL above
+and click the \emph{Open in Colab} badge, or use
+\emph{File $\rightarrow$ Open notebook $\rightarrow$ GitHub tab} and paste the
+URL.}
 
 \section*{Performance Summary -- Decision Tree}
 
@@ -63,17 +63,19 @@ ID3 (Entropy)& 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 \\
 \end{tabular}
 \end{center}
 
-\noindent Both decision trees recover essentially the same splits on this dataset
-because the target is highly separable by a small subset of features
-(\texttt{anxiety\_level} and \texttt{stress\_level}).
+\noindent Both decision trees reach a perfect test score on this particular
+train/test split, because the target is highly separable by a small subset of
+features (\texttt{anxiety\_level} and \texttt{stress\_level}). Best
+hyperparameters for both trees:
+\texttt{max\_depth = 5}, \texttt{min\_samples\_split = 2}, \texttt{class\_weight = balanced}.
 
 \section*{K-Means Clustering Summary}
 
 \begin{itemize}[leftmargin=*]
     \item \textbf{Dataset:} Teens Mental Health Dataset (1\,200 rows, 12 features
         after dropping the binary target).
-    \item \textbf{Optimal K:} 4 (selected from the elbow in the WCSS curve with
-        silhouette-based validation).
+    \item \textbf{Optimal K:} 4 (selected as the global maximum of the silhouette
+        score, $\approx 0.0695$).
     \item \textbf{Cluster sizes:} 322, 267, 290, 321.
     \item \textbf{Real-world prediction:} 10 hand-crafted teen profiles were scaled
         with the same fitted \texttt{StandardScaler} used at training time and
@@ -97,7 +99,8 @@ because the target is highly separable by a small subset of features
 
 \vfill
 
-\noindent {\small \textit{Note: All Colab notebooks have permissions set to ``Anyone
-with the link can view.''}}
+\noindent {\small \textit{Note: All GitHub notebooks are public. The Colab
+sessions are created on demand and inherit the public-read permission of the
+underlying GitHub repository.}}
 
 \end{document}

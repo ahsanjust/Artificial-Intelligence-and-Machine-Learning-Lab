@@ -39,9 +39,12 @@ any manual file upload.
 | CART (Gini)  | 1.0000   | 1.0000    | 1.0000 | 1.0000   | 1.0000  |
 | ID3 (Entropy)| 1.0000   | 1.0000    | 1.0000 | 1.0000   | 1.0000  |
 
-The two trees recover essentially the same splits on this dataset — a typical outcome
-when the target is highly separable by a small subset of features
-(`anxiety_level` and `stress_level`).
+The two trees recover essentially the same splits on this dataset — a typical
+outcome when the target is highly separable by a small subset of features
+(`anxiety_level` and `stress_level`). Both converged to `max_depth = 5`,
+`min_samples_split = 2`, and `class_weight = 'balanced'`. The test set
+contains only 4 positive samples out of 180, so the perfect score should
+be read with that limitation in mind.
 
 ## Visuals
 - `screenshots/Class_Distribution.png`

@@ -22,8 +22,11 @@ selected with the elbow method, the fitted model and the scaler are persisted wi
   reproducibility.
 - `sklearn.preprocessing.StandardScaler` — fitted on the training data and then
   **re-used unchanged** on the custom data.
-- Optimal $K$ selected with the elbow method (WCSS / Inertia) and confirmed with the
-  silhouette score.
+- Optimal $K$ selected with the elbow method (WCSS / Inertia) and confirmed with
+  the silhouette score. The maximum silhouette is $\approx 0.0695$ at $K = 4$.
+  This is a low absolute silhouette, which is typical of real survey data with
+  overlapping feature distributions; the four profiles below should be read as
+  *rough dominant demographics* per cluster, not as crisp decision rules.
 - Model and scaler saved to `model/220119_kmeans.pkl` and
   `model/220119_scaler.pkl` with `joblib`.
 - The custom data is loaded from the local dataset folder, scaled with the same
