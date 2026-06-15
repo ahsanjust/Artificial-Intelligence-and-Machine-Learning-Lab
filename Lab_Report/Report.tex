@@ -93,69 +93,86 @@
 % =====================================================================
 \begin{titlepage}
 \thispagestyle{empty}
+\enlargethispage{2cm}
 \begin{center}
-\vspace*{1.2cm}
 
-% --- Top department banner ---
-{\color{primary}\large\bfseries DEPARTMENT OF COMPUTER SCIENCE} \\[3pt]
-{\color{primary}\large\bfseries AND ENGINEERING} \\[6pt]
-{\color{primary!70!black}\itshape\large Faculty of Science and Information Technology} \\[6pt]
-{\color{primary}\rule{0.6\linewidth}{0.8pt}}
+% --- Top decorative mark ---
+{\color{accent}\rule[0.5ex]{2.5cm}{1.5pt}}
 
-\vspace{1.4cm}
+\vspace{1.0cm}
 
-% --- Course banner ---
-{\color{primary!80!black}\Large\bfseries Artificial Intelligence} \\[3pt]
-{\color{primary!80!black}\Large\bfseries and Machine Learning Lab} \\[4pt]
-{\color{primary!70!black}\itshape\large Laboratory Report}
-
-\vspace{1.6cm}
-
-% --- Main title block ---
-{\color{primary}\rule{0.4\linewidth}{1pt}} \\[10pt]
-{\color{primary}\Huge\bfseries A Comparative Study} \\[8pt]
-{\color{primary}\Huge\bfseries of Six Foundational} \\[8pt]
-{\color{primary}\Huge\bfseries Machine Learning Models} \\[10pt]
-{\color{primary}\rule{0.4\linewidth}{1pt}} \\[12pt]
-{\color{primary!70!black}\itshape\large
-    Linear \& Logistic Regression \textbullet{} SVM \textbullet{} KNN} \\[3pt]
-{\color{primary!70!black}\itshape\large
-    Decision Trees (CART vs ID3) \textbullet{} K-Means Clustering}
-
-\vspace{2.2cm}
-
-% --- Info table ---
-\renewcommand{\arraystretch}{1.55}
-\begin{tabular}{r@{\hspace{1cm}}l}
-    \toprule
-    \rowcolor{soft}
-    \multicolumn{2}{c}{\bfseries\color{primary}\large Submitted by} \\[2pt]
-    \midrule
-    \textbf{Name}    & Ahsanul Haque \\
-    \textbf{ID}      & 220119 \\
-    \textbf{Section} & 3 -- 2 \\
-    \midrule
-    \rowcolor{soft}
-    \multicolumn{2}{c}{\bfseries\color{primary}\large Submitted to} \\[2pt]
-    \midrule
-    \textbf{Instructor} & Sabbir Ahmed \\
-    \textbf{Course}     & AI \& Machine Learning Lab \\
-    \midrule
-    \rowcolor{soft}
-    \multicolumn{2}{c}{\bfseries\color{primary}\large Submission} \\[2pt]
-    \midrule
-    \textbf{Date} & June 15, 2026 \\
-    \textbf{Type} & Comprehensive Lab Report \\
-    \bottomrule
-\end{tabular}
-
-\vfill
-
-% --- Footer: GitHub link ---
-{\color{primary!70!black}\bfseries Source Code \& Datasets} \\[3pt]
-{\color{primary!80!black}\small\url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab}}
+% --- Institutional header ---
+{\color{primary}\Large\scshape Department of Computer Science} \\[3pt]
+{\color{primary}\Large\scshape and Engineering} \\[4pt]
+{\color{primary!70!black}\normalsize\itshape Faculty of Science and Information Technology}
 
 \vspace{0.6cm}
+
+% --- Course info ---
+{\color{primary!80!black}\large\bfseries Artificial Intelligence} \\[2pt]
+{\color{primary!80!black}\large\bfseries and Machine Learning Lab} \\[2pt]
+{\color{primary!70!black}\normalsize\itshape Comprehensive Laboratory Report}
+
+\vspace{2.0cm}
+
+% --- Main title (the visual hero) ---
+{\color{primary}\Huge\bfseries A Comparative Study} \\[8pt]
+{\color{primary}\Huge\bfseries of Six Foundational} \\[8pt]
+{\color{primary}\Huge\bfseries Machine Learning Models}
+
+\vspace{0.5cm}
+
+% --- Single thick accent bar under the title ---
+{\color{accent}\rule{0.45\linewidth}{1.5pt}}
+
+\vspace{0.4cm}
+
+% --- Subtitle with the six model names ---
+{\color{primary!80!black}\large\itshape
+    Linear \& Logistic Regression \textbullet{} SVM \textbullet{} KNN} \\[3pt]
+{\color{primary!80!black}\large\itshape
+    Decision Trees (CART vs ID3) \textbullet{} K-Means Clustering}
+
+\vspace{1.8cm}
+
+% --- Thin separator ---
+{\color{primary!40}\rule{0.55\linewidth}{0.4pt}}
+
+\vspace{0.8cm}
+
+% --- Author / submission block (three labelled rows) ---
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{0.85\linewidth}{r@{\hspace{0.7cm}}>{\bfseries}l}
+    % Submitted by
+    {\color{primary!70!black}\scshape Submitted by}  & Ahsanul Haque \\
+    {\color{primary!70!black}\scshape Student ID}    & 220119 \\
+    {\color{primary!70!black}\scshape Section}       & 3 -- 2 \\
+    \\[6pt]
+    % Submitted to
+    {\color{primary!70!black}\scshape Submitted to}  & Sabbir Ahmed \\
+    {\color{primary!70!black}\scshape Course}        & AI \& Machine Learning Lab \\
+    \\[6pt]
+    % Submission
+    {\color{primary!70!black}\scshape Date}          & June 15, 2026 \\
+    {\color{primary!70!black}\scshape Report Type}   & Comprehensive Lab Report \\
+\end{tabularx}
+
+\vspace{0.8cm}
+
+% --- Thin separator ---
+{\color{primary!40}\rule{0.55\linewidth}{0.4pt}}
+
+\vspace{0.6cm}
+
+% --- Footer: GitHub link (the only bottom-anchored element) ---
+{\color{primary!70!black}\small\bfseries Source Code \& Datasets} \\[4pt]
+{\color{primary}\small\url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab}}
+
+\vspace{0.8cm}
+
+% --- Bottom decorative mark (mirrors the top) ---
+{\color{accent}\rule[-0.5ex]{2.5cm}{1.5pt}}
+
 \end{center}
 \end{titlepage}
 
