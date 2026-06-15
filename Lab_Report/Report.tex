@@ -18,25 +18,32 @@
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{multirow}
+\usepackage{colortbl}
 \usepackage{amsmath, amssymb}
 \usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{url}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{positioning, arrows.meta, shapes, calc}
+\usetikzlibrary{positioning, arrows.meta, shapes, calc, decorations.pathmorphing}
 \usepackage{listings}
-\usepackage{tcolorbox}
+\usepackage[most]{tcolorbox}
 \usepackage{fancyhdr}
 \usepackage{setspace}
 \usepackage{indentfirst}
 \usepackage[font=small,labelfont=bf]{caption}
+\usepackage{lmodern}  % better Latin Modern fonts
 
-% ---- Code listing style ---------------------------------------------
+% ---- Custom colours ------------------------------------------------
+\definecolor{accent}{RGB}{230, 126, 34}    % warm orange accent
+\definecolor{primary}{RGB}{31, 56, 100}     % deep blue
+\definecolor{soft}{RGB}{235, 240, 250}      % soft blue-grey
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+% ---- Code listing style ---------------------------------------------
 \lstdefinestyle{pythonstyle}{
     backgroundcolor=\color{backcolour},
     commentstyle=\color{codegreen},
@@ -86,30 +93,116 @@
 % COVER PAGE
 % =====================================================================
 \begin{titlepage}
-    \centering
-    \vspace*{1cm}
-    {\Large \textbf{Artificial Intelligence and Machine Learning Lab}} \\[0.3cm]
-    {\Large \textbf{Comprehensive Report}} \\[0.8cm]
-    \rule{\linewidth}{0.5mm} \\[0.4cm]
-    {\huge \textbf{A Comparative Study of Six Foundational ML Models}} \\[0.4cm]
-    {\Large Linear \& Logistic Regression \textbullet{} SVM \textbullet{} KNN \textbullet{} Decision Trees \textbullet{} K-Means} \\[0.4cm]
-    \rule{\linewidth}{0.5mm} \\[1.2cm]
+\thispagestyle{empty}
+\newgeometry{margin=0cm}
+\begin{tikzpicture}[remember picture, overlay]
+    % ---- Background panel ----
+    \fill[soft] (current page.north west) rectangle ([yshift=-7cm]current page.north east);
+    \fill[primary]   (current page.south west) rectangle ([yshift=2.5cm]current page.south east);
 
-    \begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black, width=0.75\linewidth, arc=3mm]
-        \centering
-        \textbf{Name:} \quad Ahsanul Haque \\[2pt]
-        \textbf{Student ID:} \quad 220119 \\[2pt]
-        \textbf{Course:} \quad AI \& ML Lab \\[2pt]
-        \textbf{Section:} \quad 3-2 \\[2pt]
-        \textbf{Submission Date:} \quad June 2026
-    \end{tcolorbox}
+    % ---- Top accent stripe ----
+    \fill[primary] (current page.north west) rectangle ([yshift=-0.3cm]current page.north east);
+    \fill[accent!80!primary] ([yshift=-0.3cm]current page.north west) rectangle ([yshift=-0.45cm]current page.north east);
 
-    \vfill
-    \begin{tcolorbox}[colback=gray!5!white, colframe=gray!50!black, width=0.95\linewidth, arc=2mm]
+    % ---- Bottom accent stripe (mirrored) ----
+    \fill[primary] (current page.south west) rectangle ([yshift=0.45cm]current page.south east);
+    \fill[accent!80!primary] ([yshift=0.3cm]current page.south west) rectangle ([yshift=0.45cm]current page.south east);
+
+    % ---- Decorative left sidebar ----
+    \fill[primary] ([xshift=0cm, yshift=-7cm]current page.north west) rectangle ([xshift=0.35cm, yshift=2.5cm]current page.north west);
+
+    % ---- Decorative right accent: dotted vertical strip ----
+    \foreach \y in {1.5,1.8,...,6.5} {
+        \fill[primary!40] ([xshift=-1.4cm, yshift=-\y cm]current page.north east) circle (0.08);
+    }
+    \foreach \y in {1.65,1.95,...,6.65} {
+        \fill[accent!70] ([xshift=-1.7cm, yshift=-\y cm]current page.north east) circle (0.05);
+    }
+\end{tikzpicture}
+
+% ----- Top banner content (institution, faculty) ----
+\vspace*{0.4cm}
+\begin{center}
+    {\color{primary}\rule{\linewidth}{0.4pt}} \\[0.35cm]
+    {\large\bfseries\color{primary} DEPARTMENT OF COMPUTER SCIENCE \\ AND ENGINEERING} \\[0.25cm]
+    {\large\itshape\color{primary!75!black} Faculty of Science and Information Technology} \\[0.35cm]
+    {\color{primary}\rule{\linewidth}{0.4pt}}
+\end{center}
+
+\vspace{1.4cm}
+
+% ----- Course banner ----
+\begin{center}
+    {\Large\bfseries\color{primary!90!black} Artificial Intelligence \\ and Machine Learning Lab} \\[0.25cm]
+    {\large\itshape\color{primary!75!black} Course Code: CSE -- 3-2 \textbullet{} Laboratory Report}
+\end{center}
+
+\vspace{1.3cm}
+
+% ----- Main title block ----
+\begin{center}
+    \begin{minipage}{0.92\linewidth}
         \centering
-        \textbf{Code \& Data Repository} \\[2pt]
-        \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab}
-    \end{tcolorbox}
+        \begin{tcolorbox}[
+            colback=white, colframe=primary,
+            boxrule=0.8pt, arc=2mm,
+            left=10pt, right=10pt, top=14pt, bottom=14pt,
+            enhanced, drop shadow={primary!60!black, opacity=0.25}
+        ]
+            {\Huge\bfseries\color{primary} A Comparative Study} \\[0.25cm]
+            {\Huge\bfseries\color{primary} of Six Foundational} \\[0.25cm]
+            {\Huge\bfseries\color{primary} Machine Learning Models} \\[0.5cm]
+            \begin{tikzpicture}
+                \draw[accent, line width=1.2pt] (0,0) -- (8,0);
+                \node[circle, fill=accent, draw=primary, line width=0.8pt,
+                      minimum size=0.55cm, inner sep=0pt] at (4,0) {\color{white}\scriptsize\bfseries 6};
+            \end{tikzpicture} \\[0.4cm]
+            {\Large\color{primary!75!black} Linear \& Logistic Regression $\bullet$ SVM $\bullet$ KNN \\[2pt]
+             Decision Trees (CART vs ID3) $\bullet$ K-Means Clustering}
+        \end{tcolorbox}
+    \end{minipage}
+\end{center}
+
+\vspace{1.2cm}
+
+% ----- Author / submission info table ----
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\setlength{\arrayrulewidth}{0.5pt}
+\arrayrulecolor{primary}
+\begin{tabularx}{0.88\linewidth}{>{\bfseries\color{primary}}l X}
+    \toprule
+    \rowcolor{soft}\multicolumn{2}{l}{\bfseries\color{primary}\large Submitted by} \\[4pt]
+    \midrule
+    Name                              & Ahsanul Haque \\
+    Student ID                        & 220119 \\
+    Section                           & 3 -- 2 \\
+    \midrule
+    \rowcolor{soft}\multicolumn{2}{l}{\bfseries\color{primary}\large Submitted to} \\[4pt]
+    \midrule
+    Course Instructor                 & Sabbir Ahmed \\
+    Course Title                      & AI \& Machine Learning Lab \\
+    \midrule
+    \rowcolor{soft}\multicolumn{2}{l}{\bfseries\color{primary}\large Submission} \\[4pt]
+    \midrule
+    Date of Submission                & June 15, 2026 \\
+    Report Type                       & Comprehensive Lab Report \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+% ----- Footer (in bottom blue band) ----
+\vfill
+\begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=center, text=white] at ([yshift=1.25cm]current page.south) {%
+        \begin{minipage}{0.92\linewidth}
+            \centering
+            {\bfseries\large Source Code \& Datasets} \\[2pt]
+            \texttt{\small https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab}
+        \end{minipage}
+    };
+\end{tikzpicture}
+\restoregeometry
 \end{titlepage}
 
 % =====================================================================
