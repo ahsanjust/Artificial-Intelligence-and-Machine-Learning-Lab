@@ -366,15 +366,15 @@ The parameters are updated iteratively with batch gradient descent:
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.32\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_2/Linear_Regression/screenshots/Training Loss Curve.png}
+        \includegraphics[width=\linewidth]{figures/training_loss_curve_1.png}
         \caption{Training loss curve}
     \end{subfigure}
     \begin{subfigure}{0.32\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_2/Linear_Regression/screenshots/Actual vs predicted values.png}
+        \includegraphics[width=\linewidth]{figures/actual_vs_predicted_values_1.png}
         \caption{Actual vs predicted}
     \end{subfigure}
     \begin{subfigure}{0.32\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_2/Linear_Regression/screenshots/Residual Graph.png}
+        \includegraphics[width=\linewidth]{figures/residual_graph_1.png}
         \caption{Residual analysis}
     \end{subfigure}
     \caption{Linear regression diagnostics.}
@@ -464,16 +464,16 @@ with gradient
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_2/Logistic_Regression/screenshots/Training Loss Curve.png}
+        \includegraphics[width=\linewidth]{figures/training_loss_curve_2.png}
         \caption{Training loss}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_2/Logistic_Regression/screenshots/Confusion Matrix.png}
+        \includegraphics[width=\linewidth]{figures/confusion_matrix_1.png}
         \caption{Confusion matrix}
     \end{subfigure}
     \\[6pt]
     \begin{subfigure}{0.6\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_2/Logistic_Regression/screenshots/ROC curve.png}
+        \includegraphics[width=\linewidth]{figures/roc_curve_1.png}
         \caption{ROC curve}
     \end{subfigure}
     \caption{Logistic regression diagnostics.}
@@ -556,16 +556,16 @@ GridSearchCV(SVC(class_weight='balanced', probability=True, random_state=42),
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_3/SVM/screenshots/Confusion_Matrix.png}
+        \includegraphics[width=\linewidth]{figures/confusion_matrix_2.png}
         \caption{Confusion matrix}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_3/SVM/screenshots/ROC_Curve.png}
+        \includegraphics[width=\linewidth]{figures/roc_curve_2.png}
         \caption{ROC curve}
     \end{subfigure}
     \\[6pt]
     \begin{subfigure}{0.6\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_3/SVM/screenshots/Decision_Boundary.png}
+        \includegraphics[width=\linewidth]{figures/decision_boundary_1.png}
         \caption{2-D decision boundary}
     \end{subfigure}
     \caption{SVM diagnostics.}
@@ -646,16 +646,16 @@ GridSearchCV(KNeighborsClassifier(),
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_3/KNN/screenshots/Elbow_Method.png}
+        \includegraphics[width=\linewidth]{figures/elbow_method_1.png}
         \caption{Elbow method (error vs $K$)}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_3/KNN/screenshots/Confusion_Matrix.png}
+        \includegraphics[width=\linewidth]{figures/confusion_matrix_3.png}
         \caption{Confusion matrix}
     \end{subfigure}
     \\[6pt]
     \begin{subfigure}{0.6\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_3/KNN/screenshots/ROC_Curve.png}
+        \includegraphics[width=\linewidth]{figures/roc_curve_3.png}
         \caption{ROC curve}
     \end{subfigure}
     \caption{KNN diagnostics.}
@@ -750,25 +750,25 @@ GridSearchCV(DecisionTreeClassifier(criterion='entropy', random_state=42),
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_4/DT/screenshots/Decision_Boundary_Comparison.png}
+        \includegraphics[width=\linewidth]{figures/decision_boundary_comparison_1.png}
         \caption{Decision boundary (2$\times$1)}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_4/DT/screenshots/Confusion_Matrix_Comparison.png}
+        \includegraphics[width=\linewidth]{figures/confusion_matrix_comparison_1.png}
         \caption{Confusion matrix (2$\times$1)}
     \end{subfigure}
     \\[6pt]
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_4/DT/screenshots/ROC_Comparison.png}
+        \includegraphics[width=\linewidth]{figures/roc_comparison_1.png}
         \caption{ROC curve (2$\times$1)}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_4/DT/screenshots/Metrics_Comparison.png}
+        \includegraphics[width=\linewidth]{figures/metrics_comparison_1.png}
         \caption{Evaluation metrics bar chart}
     \end{subfigure}
     \\[6pt]
     \begin{subfigure}{\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_4/DT/screenshots/Tree_Structure.png}
+        \includegraphics[width=\linewidth]{figures/tree_structure_1.png}
         \caption{Optimised tree structure (CART vs ID3, first 3 levels)}
     \end{subfigure}
     \caption{Decision tree diagnostics: 2$\times$1 comparisons plus the
@@ -830,7 +830,7 @@ maximum of the silhouette score} on this dataset (silhouette $\approx 0.0695$).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{../Lab_4/KMeans/screenshots/Elbow_Curve.png}
+    \includegraphics[width=0.85\textwidth]{figures/elbow_curve_1.png}
     \caption{Elbow curve (WCSS) and silhouette analysis for $K = 1, \dots, 10$.
     The silhouette peaks at $K=4$.}
     \label{fig:kmeans-elbow}
@@ -862,16 +862,16 @@ maximum of the silhouette score} on this dataset (silhouette $\approx 0.0695$).
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_4/KMeans/screenshots/Cluster_Scatter.png}
+        \includegraphics[width=\linewidth]{figures/cluster_scatter_1.png}
         \caption{Cluster scatter (PCA projection)}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_4/KMeans/screenshots/Custom_Prediction_Plot.png}
+        \includegraphics[width=\linewidth]{figures/custom_prediction_plot_1.png}
         \caption{Custom profiles overlaid on clusters}
     \end{subfigure}
     \\[6pt]
     \begin{subfigure}{0.6\textwidth}
-        \includegraphics[width=\linewidth]{../Lab_4/KMeans/screenshots/Custom_Cluster_Distribution.png}
+        \includegraphics[width=\linewidth]{figures/custom_cluster_distribution_1.png}
         \caption{Custom profile cluster distribution}
     \end{subfigure}
     \caption{K-Means cluster analysis and real-world prediction.}

@@ -5,37 +5,38 @@ Lab 2 through Lab 4.
 
 ## Files
 
-| File          | Description                                              |
-|---------------|----------------------------------------------------------|
-| `Report.tex`  | The complete LaTeX report (Overleaf-ready).              |
-| `report.md`   | The original brief from the instructor.                  |
+```
+Lab_Report/
+├── Report.tex          # Main LaTeX report (Overleaf-ready)
+├── figures/            # All 21 referenced images, safe filenames
+│   ├── training_loss_curve_1.png
+│   ├── ...
+│   └── custom_cluster_distribution_1.png
+├── README.md           # This file
+└── report.md           # Original brief from the instructor
+```
+
+The `figures/` directory is local to `Report.tex` — every
+`\includegraphics{figures/...}` path is relative to the `Report.tex`
+location, so no `Lab_2/` / `Lab_3/` / `Lab_4/` folders need to be
+uploaded alongside the `.tex` to Overleaf.
 
 ## How to Compile on Overleaf
 
 1. **Create a new project** on [Overleaf](https://www.overleaf.com).
-2. **Upload the file `Report.tex`** to the project root.
-3. **Upload the entire repository** as a zip, or upload the screenshots
-   folders individually, so that the relative image paths resolve.
-
-   The cleanest way is to keep the directory layout
+2. **Upload `Report.tex` and the `figures/` folder** as a single zip,
+   then drag-and-drop the zip into the project.
+3. The project root should look like:
    ```
    .
    ├── Report.tex
-   ├── Lab_2/
-   │   ├── Linear_Regression/screenshots/...
-   │   └── Logistic_Regression/screenshots/...
-   ├── Lab_3/
-   │   ├── SVM/screenshots/...
-   │   └── KNN/screenshots/...
-   └── Lab_4/
-       ├── DT/screenshots/...
-       └── KMeans/screenshots/...
+   └── figures/
+       ├── *.png  (21 files)
    ```
-   and set Overleaf's **main document** to `Lab_Report/Report.tex`.
 4. Set the compiler to **pdfLaTeX** (the default).
-5. Click **Recompile**. The report should compile without errors.
+5. Click **Recompile**. Every figure should render in place.
 
-## Local Compilation (if you have TeX Live)
+## Local Compilation (if you have TeX Live / Tectonic)
 
 ```bash
 cd Lab_Report
@@ -45,10 +46,9 @@ pdflatex -interaction=nonstopmode Report.tex   # second pass for the TOC
 
 ## Notes
 
-* The report embeds screenshots via `\includegraphics` with relative
-  paths starting `../Lab_*` — keep that structure when you upload to
-  Overleaf.
-* All equations, tables, figures, captions, the table of contents and
-  the reference list are included.
+* The report embeds screenshots via `\includegraphics{figures/...}` —
+  this directory layout means the `Report.tex` is fully self-contained.
+* All 21 image filenames are lowercase with underscores (no spaces),
+  which keeps the `\includegraphics` calls portable and shell-safe.
 * No PDF file is committed — only the `.tex` source, per the lab
   instructions.
