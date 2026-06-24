@@ -1,0 +1,84 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={220133 - Lab 5 Assignment Links},
+    pdfauthor={Md. Maruf (220133)}
+}
+
+\begin{document}
+
+\begin{center}
+    {\huge \textbf{AI \& ML Lab 5 -- Assignment Links}} \\[0.3cm]
+    {\Large \textbf{Name: Md. Maruf}} \\[0.1cm]
+    {\Large \textbf{ID: 220133}} \\[0.4cm]
+    {\large \textbf{Neural Network (ANN) -- Shallow vs Deep}} \\[0.5cm]
+\end{center}
+
+\noindent The notebook is configured to fetch the dataset from a public GitHub raw URL,
+so it can be opened in Google Colab (via \emph{File $\rightarrow$ Open notebook
+$\rightarrow$ GitHub}) and \textbf{Run All} will execute the full pipeline with no
+manual file upload.
+
+\section*{Repository and Notebooks}
+
+\begin{enumerate}[leftmargin=*, itemsep=0.3cm]
+
+    \item \textbf{GitHub Profile:} \\
+    \url{https://github.com/ahsanjust/}
+
+    \item \textbf{Lab 5 v2 Folder in the Project Repository:} \\
+    \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/tree/master/Lab_5_v2}
+
+    \item \textbf{Neural Network (ANN) -- GitHub Notebook:} \\
+    \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/blob/master/Lab_5_v2/220133_ANN.ipynb}
+
+    \item \textbf{Google Colab Notebook (Direct Link):} \\
+    \url{https://colab.research.google.com/drive/YOUR_COLAB_LINK_HERE}
+
+    \item \textbf{Dataset -- GitHub Raw Link:} \\
+    \url{https://raw.githubusercontent.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/master/Lab_5_v2/ai_student_impact_dataset.csv}
+
+\end{enumerate}
+
+\noindent The Colab notebook has permissions set to ``Anyone with the link can view''
+so the instructor can open it directly.
+
+\section*{Performance Summary -- Neural Network}
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{AUC-ROC} \\
+\midrule
+Shallow NN (1 hidden layer) & 0.5181 & 0.5171 & 0.5181 & 0.5093 & 0.6875 \\
+Deep NN (3 hidden layers)   & 0.4952 & 0.5104 & 0.4952 & 0.4659 & 0.6845 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Architecture Summary}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Shallow NN:} Input $\rightarrow$ 1 hidden layer (64 neurons, ReLU) $\rightarrow$ 3-class Output
+    \item \textbf{Deep NN:} Input $\rightarrow$ 3 hidden layers (128/64/32, ReLU + BatchNorm + Dropout) $\rightarrow$ 3-class Output
+    \item \textbf{Dataset:} AI Student Impact Dataset (50\,000 rows, 15 features)
+    \item \textbf{Target:} Burnout\_Risk\_Level (Low / Medium / High) -- multi-class
+    \item \textbf{Loss:} Weighted Cross-Entropy (class-weighted)
+    \item \textbf{Metrics:} Weighted Precision, Recall, F1, AUC-ROC (One-vs-Rest)
+\end{itemize}
+
+\vfill
+
+\noindent {\small \textit{Note: All GitHub notebooks are public. The Colab sessions
+are created on demand and inherit the public-read permission of the underlying GitHub
+repository.}}
+
+\end{document}
