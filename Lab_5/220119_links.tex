@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={220119 - Lab 5 Assignment Links},
+    pdfauthor={Ahsanul Haque (220119)}
+}
+
+\begin{document}
+
+\begin{center}
+    {\huge \textbf{AI \& ML Lab 5 -- Assignment Links}} \\[0.3cm]
+    {\Large \textbf{Name: Ahsanul Haque}} \\[0.1cm]
+    {\Large \textbf{ID: 220119}} \\[0.4cm]
+    {\large \textbf{Neural Network (ANN) -- Shallow vs Deep}} \\[0.5cm]
+\end{center}
+
+\noindent The notebook is configured to fetch the dataset from a public GitHub raw URL,
+so it can be opened in Google Colab (via \emph{File $\rightarrow$ Open notebook
+$\rightarrow$ GitHub}) and \textbf{Run All} will execute the full pipeline with no
+manual file upload.
+
+\section*{Repository and Notebooks}
+
+\begin{enumerate}[leftmargin=*, itemsep=0.3cm]
+
+    \item \textbf{GitHub Profile:} \\
+    \url{https://github.com/ahsanjust/}
+
+    \item \textbf{Lab 5 Folder in the Project Repository:} \\
+    \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/tree/master/Lab_5}
+
+    \item \textbf{Neural Network (ANN) -- GitHub Notebook:} \\
+    \url{https://github.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/blob/master/Lab_5/ANN/220119_ANN.ipynb}
+
+    \item \textbf{Neural Network (ANN) -- Google Colab:} \\
+    \emph{(Open the GitHub notebook in Colab via File $\rightarrow$ Open notebook $\rightarrow$ GitHub, or use the direct Colab URL once published.)}
+
+    \item \textbf{Dataset -- GitHub Raw Link:} \\
+    \url{https://raw.githubusercontent.com/ahsanjust/Artificial-Intelligence-and-Machine-Learning-Lab/master/Lab_5/ANN/dataset/Teen_Mental_Health_Dataset.csv}
+
+\end{enumerate}
+
+\noindent The Colab notebook has permissions set to ``Anyone with the link can view''
+so the instructor can open it directly.
+
+\section*{Performance Summary -- Neural Network}
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{AUC-ROC} \\
+\midrule
+Shallow NN (1 hidden layer) & \emph{(run notebook)} & \emph{(run notebook)} & \emph{(run notebook)} & \emph{(run notebook)} & \emph{(run notebook)} \\
+Deep NN (3 hidden layers)   & \emph{(run notebook)} & \emph{(run notebook)} & \emph{(run notebook)} & \emph{(run notebook)} & \emph{(run notebook)} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent \emph{Note: The exact performance metrics are produced when the notebook is
+executed. Fill in the values above after running.}
+
+\section*{Architecture Summary}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Shallow NN:} Input $\rightarrow$ 1 hidden layer (ReLU/Sigmoid/Tanh) $\rightarrow$ Output
+    \item \textbf{Deep NN:} Input $\rightarrow$ 3 hidden layers (ReLU + BatchNorm + Dropout) $\rightarrow$ Output
+    \item \textbf{Dataset:} Teens Mental Health Dataset (1\,200 rows, 12 features)
+    \item \textbf{Imbalance handling:} Weighted Binary Cross-Entropy loss
+\end{itemize}
+
+\vfill
+
+\noindent {\small \textit{Note: All GitHub notebooks are public. The Colab sessions
+are created on demand and inherit the public-read permission of the underlying GitHub
+repository.}}
+
+\end{document}
